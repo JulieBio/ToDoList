@@ -1,0 +1,92 @@
+<div class="container">
+
+    <!-- ----------------------------- Ajouter une liste ----------------------------- -->
+
+    <div class="row d-flex justify-content-center mt-5 mb-3">
+        <div class="input-group mb-5" style="width: 50rem;">
+            <!-- Création du titre de la nouvelle liste -->
+            <input type="text" [(ngModel)]="todoTitle" class="form-control font-italic" placeholder="Nom de la liste" 
+                    aria-label="Nom de la liste" aria-describedby="button-addon2">
+            <div class="input-group-append">
+                <button (click)="addList(todoTitle)" class="btn btn-outline-primary"type="submit" id="button-addon2">
+                    <fa-icon class="mr-2" [icon]="faPlus"></fa-icon>Ajouter une liste
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ----------------------------- Listes ----------------------------- -->
+
+    <div class="row d-flex justify-content-center">
+        <div *ngFor="let liste of listes?.todoListes;let i = index;" [classList]="liste" class="col mb-5 ml-3">
+            <div class="card mb-5 mx-3" style="width: 30rem;">
+                <!-- Affichage du titre de la liste -->
+                <div class="card-header d-flex justify-content-between">
+
+                    <!-- si l'élément n'est pas editing (false) sinon => template #editingList -->              
+                        <div *ngIf="!editingL; else editingList" class="titleList"
+                            (dblclick)="editList(liste.name)" style="font-size: 1.1rem;">
+                            <B>{{ liste.name }}</B>
+                        </div>
+                        <!-- apparait si la condition est valide : -->            
+                        <ng-template #editingList> 
+                            <input type="text" class="titleListEdit" 
+                                [(ngModel)]="liste.name" 
+                                (blur)="doneEditL(liste.name, i)" 
+                                (keyup.enter)="doneEditL(liste.name, i)" 
+                                autofocus>
+                        </ng-template>
+
+
+                    <!-- suppression d'une liste -->
+                    <div class="deleteList" (click)="deleteList(i)">
+                        <fa-icon class="ml-2 text-danger" [icon]="faTrash"></fa-icon>
+                    </div>
+
+                </div> 
+
+<!-- ----------------------------- Tâches ----------------------------- -->
+
+                <ul class="list-group list-group-flush">
+                    <!-- chaque ligne de tache -->
+                    <li class="list-group-item d-flex justify-content-between" 
+                    *ngFor="let item of listes.todoListes[i].elements; let j = index;">
+                        <div *ngIf="!editingI; else editingItem" class="titleItem" name=""
+                            (dblclick)="editItem(item)"> {{ item }} 
+                        </div>
+                        <!-- apparait si la condition est valide : -->
+                        <ng-template #editingItem> 
+                            <input type="text" class="titleItemEdit"
+                                [(ngModel)]="item" 
+                                (blur)="doneEditI(item, i, j)"
+                                (keyup.enter)="doneEditI(item, i, j)" 
+                                autofocus>
+                        </ng-template>
+
+                        <!-- suppression d'un item -->
+                        <span>
+                            <div class="deleteItem" (click)="deleteItem(i, j)">
+                                <fa-icon class="ml-2 text-danger" [icon]="faTrash"></fa-icon>
+                            </div>
+                        </span> 
+                    </li>
+                </ul>
+
+    <!-- ----------------------------- Ajout d'une tâche ----------------------------- -->
+                <!-- Ajout d'une tache -->
+                <div class="input-group">
+                    <!-- Création du nom de la nouvelle tache -->
+                    <input type="text" [(ngModel)]="listes.todoListes[i].elements[j]" class="form-control font-italic" placeholder="Nom de la tâche" 
+                        aria-label="Nom de la tâche" aria-describedby="button-addon2">
+                    <div class="input-group-append">
+                        <button (click)="addItem(listes.todoListes[i].elements[j], i)" class="btn btn-outline-primary" 
+                            type="submit" id="button-addon2">
+                            <fa-icon class="mr-2" [icon]="faPlus">
+                            </fa-icon>Ajouter une tâche
+                        </button>
+                    </div>
+                </div>                 
+            </div>      
+        </div>
+    </div> 
+</div>

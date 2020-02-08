@@ -1,0 +1,36 @@
+<div class="container">
+    <div class="row d-flex justify-content-center mt-5">
+        <div class="card shadow bg-white rounded m-4">
+            <div class="card-body m-5"> 
+                <form class="form-signin">
+                    <h1 class="h3 mb-5 font-weight-normal text-center">S'inscrire</h1>
+                    <label for="inputLogin" class="sr-only">Login</label>
+                    <input type="text" [(ngModel)]="loginI" value={{loginI}} 
+                        name="logInscript" class="form-control mb-3" placeholder="Login" required autofocus>
+                    <label for="inputPassword" class="sr-only">Password</label>
+                    <input type="password" [(ngModel)]="passwordI" value={{passwordI}}
+                        name="passInscript" class="form-control mb-4" placeholder="Password" required>
+                    <div class="checkbox mb-4"></div>
+                    <button (click)="inscription()" class="btn btn-lg btn-primary btn-block mb-3 inscriptionValid" 
+                        type="submit">inscription</button>
+                </form>
+            </div>
+        </div>
+        <div class="card shadow m-2 bg-white rounded m-4">
+            <div class="card-body m-5"> 
+                <form class="form-signin">
+                    <h1 class="h3 mb-5 font-weight-normal text-center">Se connecter</h1>
+                    <label for="inputLogin" class="sr-only">Login</label>
+                    <input type="text" [(ngModel)]="loginC" value={{loginC}}  name="logConnect" 
+                        class="form-control mb-3" placeholder="Login" required autofocus>
+                    <label for="inputPassword" class="sr-only">Password</label>
+                    <input type="password" [(ngModel)]="passwordC" value={{passwordC}} 
+                        name="passConnect" class="form-control mb-4" placeholder="Password" required>
+                    <div class="checkbox mb-4"></div>
+                    <button (click)="connexion()" class="btn btn-lg btn-primary btn-block mb-3" 
+                        type="submit">connexion</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
