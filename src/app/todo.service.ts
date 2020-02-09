@@ -73,26 +73,22 @@ getListes() {
 // ------------------------------------------ LISTS ------------------------------------------
   // ajouter une liste
   addListTitle(todoTitle) {
-    console.log(this.listes);
     this.listes.todoListes.push({ name : todoTitle, elements : [] });
-    console.log(this.listes);
     this.http.post<IList>(this.listUrl, this.listes)
     .subscribe(data => {console.log(data)});
-    console.log(this.listes);
   }
 
   // supprimer une liste
   getDeleteList(i): void {
-    console.log(this.listes);
     this.listes.todoListes.splice(i,1);
-    console.log(this.listes);
     this.http.post(this.listUrl, this.listes)
     .subscribe(data => {console.log(data)});
-    console.log(this.listes);
   }
 
-  getEditList(liste : IList, i : number): void {
-    // this.todoTitleFirst = todo.title;
+  // modifier le nom d'une liste
+  getEditList(nameliste : IList, i : number): void {
+    this.http.post(this.listUrl, this.listes)
+    .subscribe(data => {console.log(data)});
   }
 
  
@@ -102,21 +98,20 @@ getListes() {
     this.listes.todoListes[i].elements.push(itemTitle);
     this.http.post<IList>(this.listUrl, this.listes)
     .subscribe(data => {console.log(data)});
-    console.log(this.listes);
   }
 
   // supprimer un item
   getDeleteItem(i : number, j : number): void {
     this.listes.todoListes[i].elements.splice(j,1);
-    console.log(this.listes);
     this.http.post<IList>(this.listUrl, this.listes)
     .subscribe(data => {console.log(data)});
-    console.log(this.listes);
   }
 
-  getEditItem(list : IList, j : number): void {
-    // this.itemTitleFirst = item.title;
-    // item.editI = true;
+  // modifier le nom d'une tâche
+  getEditItem(item : string, i : number, j : number): void {
+    this.listes.todoListes[i].elements.splice(j,1,item);
+    this.http.post(this.listUrl, this.listes)
+    .subscribe(data => {console.log(data)});
   }
 
 }

@@ -9,6 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AutofocusModule } from 'angular-autofocus-fix';
 import { NgxTrimDirectiveModule } from 'ngx-trim-directive';
+import { InlineEditorModule } from '@qontu/ngx-inline-editor';
 
 import { AppComponent } from './app.component';
 import { TodoService } from './todo.service';
@@ -31,7 +32,8 @@ import { TodolistComponent } from './component/todolist/todolist.component';
     HttpClientModule,
     ReactiveFormsModule,
     AutofocusModule,
-    NgxTrimDirectiveModule
+    NgxTrimDirectiveModule,
+    InlineEditorModule
   ],
   providers: [TodoService],
   bootstrap: [AppComponent]

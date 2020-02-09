@@ -37,7 +37,6 @@ export class TodolistComponent implements OnInit {
   ngOnInit() { 
     this.firstTitleList = '';
     this.listes = this.todoService.getListes();
-    console.log(this.listes);
  }
 
   // ajouter une liste
@@ -54,55 +53,20 @@ export class TodolistComponent implements OnInit {
   deleteList(i : number) :void {
     this.todoService.getDeleteList(i);
   }
-  // supprimer un item
+  // supprimer une tâche
   deleteItem(i : number, j : number): void {
     this.todoService.getDeleteItem(i,j);
   }
 
-  // Liste titre : modifications du champ (dblclick) / récupération de la valeur de name et transformation en string
-  editList(nameliste: IList): void {
-    this.editingL = true;
-    let nameL = JSON.stringify(nameliste);
-    this.firstTitleList = nameL;
+  // Liste titre : modifications du champ titre de la liste
+  editList(nameliste: IList, i : number): void {
+    this.todoService.getEditList(nameliste, i);
   }
 
-  // modifications du champ (blur)(keyup.enter)
-  doneEditL(nameliste, i : number){
-    this.editingL = false;
-    console.log(this.firstTitleList);
-    let nameL = JSON.stringify(nameliste);
-    if(nameL.length === 0){
-      nameL = this.firstTitleList;
-      console.log(this.firstTitleList);
-      console.log(this.listes.todoListes[i].name);
-    }
-    this.todoService.getEditList(this.listes, i)
+  // Item titre :  modifications du champ du nom de la tâche
+  editItem(item : string, i : number, j : number): void {
+    this.todoService.getEditItem(item, i, j);
   }
-
-
-  // Item titre :  modifications du champ (dblclick) / récupération de la valeur de name et transformation en string
-    editItem(item : IList): void {
-      let nameI = JSON.stringify(item);
-      this.firstTitleItem = nameI;
-      this.editingI = true;
-    }
-  
-    // modifications du champ
-    doneEditI(item : IList, i : number, j : number): void {
-      console.log(this.firstTitleItem);
-      let nameI = JSON.stringify(item);
-      if(nameI.length === 0){
-        nameI = this.firstTitleItem;
-        console.log(this.firstTitleItem);
-        console.log(this.listes.todoListes[i].elements[j]);
-      }
-      this.editingI = false;
-      this.todoService.getEditItem(this.listes, j)
-    }
-  
-    
-  
-
 
 }
 
